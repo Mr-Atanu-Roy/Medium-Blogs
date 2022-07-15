@@ -1,0 +1,77 @@
+{% extends '../blocks/base.html' %}
+{% block title %}{{blog.title | title}}{% endblock title %}
+{% block body %}
+
+
+<section class="section sm:px-20 lg:px-32 xl:px-40 2xl:px-48 mb-36">
+
+    <div id="view-blog-header" class="flex justify-start items-center mb-20 px-14">
+        <img src="/media/{{blog.authorImg}}" class="rounded-full w-16" alt="Avatar"/>
+        <div class="ml-6">
+            <p class="text-lg f-medium">{{blog.author | title}}</p>
+            <p class="text-base f-light">{{blog.published_on}}</p>
+        </div>
+    </div>
+    <div class="img-div flex items-center justify-center" id="view-blog-image">
+        <div style="width: 26vw;">
+            <img src="/media/{{blog.img1}}" alt="" class="w-full">
+        </div>
+    </div>
+    <div class="my-14" id="view-blog-title">
+        <h1 class="text-center text-xl md:text-2xl lg:text-3xl f-bold">{{blog.title | title}}</h1>
+    </div>
+    <div class="px-12" id="view-blog-body">
+        <p class="f-medium">
+            {{blog.body | safe}}
+        </p>
+    </div>
+    {% if blog.img2 != "" %}
+    <div class="img-div flex items-center justify-center my-16" id="view-blog-image">
+        <div style="width: 36vw;">
+            <img src="/media/{{blog.img2}}" alt="" class="w-full">
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<section class="sm:px-20 lg:px-32 xl:px-40 2xl:px-48 mb-36">
+    <h1 class="text-base lg:text-2xl f-bold uppercase mb-20">related blogs</h1>
+    <div class="w-full">
+        <div class="flex flex-col justify-center item-center w-full my-20">
+            {% for blogs in relatedBlogs %}
+               {% if  blog.title != blogs.title%}
+                <div class="blog-box flex justify-evenly item-center my-8 lg:my-14">
+                    <div class="mr-4 w-1/2 md:w-1/2 lg:w-1/4 2xl:w-1/5 overflow-hidden img-div">
+                        <img src="/media/{{blogs.img1 | lower}}" alt="" class="image">
+                    </div>
+                    <div class="content w-4/6">
+                        <div class="flex justify-start items-center">
+                            <img src="/media/{{blogs.authorImg}}" alt="{{latestBlog.author}}" class="w-8 rounded-full">
+                            <p class="author f-medium text-sm md:text-base ml-2">
+                                By {{blogs.author | title}}
+                            </p>
+                          </div>
+                        <p class="title f-bold my-3 lg:text-3xl">
+                        <a href="{{blogs.slug}}">{{blogs.title | title}}</a>
+                        </p>
+                        <p class="blog-content f-medium hidden sm:block">
+                        {{blogs.body | safe | truncatewords:"40"}}
+                        </p>
+                        <p class="date mt-2">
+                        Published on : {{blogs.published_on}}
+                        </p>
+                        <div class="w-full text-right">
+                        <a href="/blogs/{{blogs.slug}}">
+                            <button class="my-btn">Read More</button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+               {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

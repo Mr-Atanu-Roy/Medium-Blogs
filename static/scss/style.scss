@@ -1,0 +1,246 @@
+@font-face {
+  font-family: heading;
+  src: url("/static/fonts/GT-Super-Display-Bold.otf");
+}
+@font-face {
+  font-family: bold;
+  src: url("/static/fonts/Sohne-Bold.otf");
+}
+@font-face {
+  font-family: medium;
+  src: url("/static/fonts/Sohne-Medium.otf");
+}
+@font-face {
+  font-family: light;
+  src: url("/static/fonts/Sohne-Light.otf");
+}
+@font-face {
+  font-family: ultralight;
+  src: url("/static/fonts/Sohne-UltraLight.otf");
+}
+.f-head {
+  font-family: heading;
+}
+.f-bold {
+  font-family: bold;
+}
+.f-medium {
+  font-family: medium;
+}
+.f-light {
+  font-family: light;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+.my-btn {
+  font-size: 1rem;
+  font-family: medium;
+  background: black;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  border: 2px solid black;
+  transition: all 0.35s ease-in-out;
+  &:hover {
+    background: none;
+    color: black;
+  }
+}
+.my-btn2 {
+  @extend .my-btn;
+  font-size: 1.3rem;
+  &:hover {
+    color: white;
+    border-color: white;
+  }
+}
+header {
+  z-index: 10000000;
+  position: fixed;
+  width: 100%;
+  border-bottom: 2px solid white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: black;
+  padding: 0 10px;
+  #header-logo {
+    padding: 6px;
+    a {
+      text-decoration: none;
+      img {
+        width: 135px;
+      }
+    }
+  }
+  #header-links {
+    ul {
+      display: flex;
+    }
+    li {
+      margin: 0 10px;
+      // border: 2px solid white;
+      list-style: none;
+      font-size: 1.35rem;
+      font-family: medium;
+      .links {
+        padding: 2px;
+        color: white;
+        text-decoration: none;
+        text-transform: capitalize;
+        letter-spacing: 0;
+        transition: all 0.26s ease-in-out;
+        position: relative;
+        top: 0;
+        left: 0;
+        &:hover {
+          letter-spacing: 0.06rem;
+        }
+      }
+      #header-login {
+        // font-family: bold;
+        margin-left: 25px;
+        background: white;
+        color: black;
+        border-radius: 15px;
+        padding: 8px 24px;
+        text-transform: uppercase;
+        border: 2px solid white;
+        transition: all 0.35s ease-in-out;
+        &:hover {
+          background: none;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.section {
+  min-height: 100vh;
+  padding-top: 150px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#trending-blogs {
+  border-bottom: 2px solid rgba(230, 230, 230, 1);
+  #heading {
+    .fa-superpowers {
+      position: relative;
+      top: 0;
+      left: 0;
+      animation-name: rotation;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+    }
+  }
+  .trending-blogs {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    top: 0;
+    left: 0;
+    .number {
+      transition: all 0.2s ease-in-out;
+      color: rgb(222, 221, 221);
+    }
+    &:hover {
+      border: 1px solid rgb(222, 221, 221);
+      // border: 1px solid rgb(204, 198, 198);
+      .number {
+        color: rgb(204, 198, 198);
+      }
+    }
+  }
+}
+
+#all-blogs {
+  #tag-fixed-box {
+    position: sticky;
+    top: 115px;
+    right: 0;
+    .tags {
+      margin: 12px;
+      a {
+        border-radius: 3.5px;
+        width: fit-content;
+        min-width: 80px;
+        text-align: center;
+        padding: 6px 9px;
+        border: 1px solid rgb(222, 221, 221);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+      }
+    }
+  }
+}
+form {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#blog-category-container {
+  .blog-category {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  /* Make the image to responsive */
+  .blog-image {
+    overflow: hidden;
+    .image {
+      display: block;
+      width: 100%;
+      height: auto;
+      position: relative;
+      top: 0;
+      left: 0;
+      transition: all 0.35s ease-in-out;
+    }
+  }
+
+  /* The overlay effect - lays on top of the container and over the image */
+  .title {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: 0.5s ease;
+    opacity: 1;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-family: bold;
+    font-size: 1.2rem;
+  }
+}
+
+.img-div{
+  overflow: hidden !important;
+  .image{
+    transition: all 0.35s ease-in-out;
+    transform: scale(1);
+  }
+  &:hover {
+    .image {
+      transform: scale(1.1);
+    }
+  }
+}
+

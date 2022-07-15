@@ -1,0 +1,102 @@
+{% extends './blocks/base.html' %}
+{% block title %}Medium-Where Good Ideas Find You{% endblock title %}
+{% block body %}
+
+
+<section class="h-screen bg-cover" style="background-image: url('/static/images/home/bg-5.jpg')">
+    <div class="flex h-full w-full items-center justify-center container mx-auto px-8 ">
+      <div class="max-w-2xl text-center">
+        {% if user.is_authenticated %}
+          <p class="mt-2 mb-4 text-3xl md:text-4xl lg:text-5xl text-white f-head text-black"> Welcome {{user.first_name | upper}} <p>
+        {% endif %}
+        <h1 class="text-4xl sm:text-6xl capitalize tracking-widest text-white lg:text-8xl f-head">Stay Curious</h1>
+        <p class="mt-6 lg:text-lg text-white f-medium text-black">Discover stories, thinking, and expertise from writers on any topic</p>
+  
+        <div class="w-full text-center mt-10">
+          <a href="#all-blogs">
+            <button class="my-btn2">Get Started</button>
+          </a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section id="trending-blogs" class="p-10 2xl:px-20 my-12 pb-0">
+  <div id="heading" class="flex items-center" >
+    <i class="fa fa-superpowers text-2xl lg:text-3xl mr-4"></i> <p class="para f-bold lg:text-2xl">Trending on Medium</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:gap-5 gap-3 justify-evenly items-center my-10 w-full">
+    {% for latestBlog in  latestBlogs%}
+    <div class="trending-blogs flex py-4">
+      <div class="number mr-6">
+        <p class="lg:text-7xl f-bold">{{latestBlog.id}}</p>
+      </div>
+      <div class="content">
+        <div class="flex justify-start items-center">
+          <img src="/media/{{latestBlog.authorImg}}" alt="{{latestBlog.author}}" class="w-8 rounded-full">
+          <p class="author f-medium ml-2">
+            {{latestBlog.author}}
+          </p>
+        </div>
+        <p class="title f-bold my-1 lg:text-2xl">
+          <a href="/blogs/{{latestBlog.slug}}"> {{latestBlog.title | title}}</a>
+        </p>
+        <p class="date mt-2">
+          {{latestBlog.published_on}}
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="all-blogs" class="grid grid-cols-3 gap-4">
+  <div class="col-span-2 px-10 py-12 2xl:px-20" id="all-blog-container">
+    <div class="flex flex-col justify-center item-center w-full">
+      <h2 class="uppercase f-bold lg:text-5xl text-black">Read Blogs</h2>
+
+      {% for blog in blogs %}
+      <div class="blog-box flex justify-evenly item-center my-8 lg:my-14">
+        <div class="mr-5 w-3/6 img-div">
+          <img src="/media/{{blog.img1}}" alt="" class="image">
+        </div>
+        <div class="content w-4/6">
+          <div class="flex justify-start items-center">
+            <img src="/media/{{blog.authorImg}}" alt="{{latestBlog.author}}" class="w-8 rounded-full">
+            <p class="author f-medium text-sm md:text-base ml-2">
+              {{blog.author}}
+            </p>
+          </div>
+          <p class="title f-bold my-3 text-sm lg:text-xl">
+            <a href="">{{blog.title | title}}</a>
+          </p>
+          <p class="blog-content f-medium">
+            {{blog.body | safe | truncatewords:"20"}}
+          </p>
+          <p class="date mt-2">
+            Published on : {{blog.published_on}}
+          </p>
+          <div class="w-full text-right">
+            <a href="/blogs/{{blog.slug}}">
+              <button class="my-btn">Read More</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      {% endfor %}
+    </div>
+  </div>
+  <div id="tag-fixed-box" class="mt-16">
+    <p class="f-medium lg:text-1xl">DISCOVER MORE OF WHAT MATTERS TO YOU</p>
+    <div class="flex flex-wrap mt-8 f-light">
+      {% for category in  blogCategory%}
+      <p class="tags uppercase"><a href="blogs/category/{{category.category}}">{{category.category}}</a></p>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+
+{% endblock body %}

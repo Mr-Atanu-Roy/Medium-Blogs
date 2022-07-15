@@ -1,0 +1,56 @@
+{% extends '../blocks/base.html' %}
+{% block title %}View Blogs{% endblock title %}
+{% block body %}
+
+<section id="blog-category-container" class="section w-full" style="min-height: fit-content;">
+    <div class="w-full px-10 2xl:px-20">
+        <h1 class="text-4xl f-bold uppercase">Keep exploring</h1>
+        <div class="my-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 lg:gap-6 justify-evenly items-center w-full">
+                {% for category in blogCategory %}
+                <div class="blog-category">
+                    <a href="/blogs/category/{{category.category | lower}}" class="blog-link">
+                        <div class="img-div"><img src="/media/{{category.categoryImg | lower}}" alt="Avatar" class="image"></div>
+                        <div class="title">{{category.category | upper}}</div>
+                    </a>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="latest-blogs" class="w-full px-10 2xl:px-20">
+    <div class="flex flex-col justify-center item-center w-full my-20">
+        {% for blogs in blogData %}
+        <div class="blog-box flex justify-evenly item-center my-8 lg:my-14">
+            <div class="mr-4 w-1/2 md:w-1/2 lg:w-1/4 2xl:w-1/5 overflow-hidden img-div">
+              <img src="/media/{{blogs.img1 | lower}}" alt="" class="image">
+            </div>
+            <div class="content w-4/6">
+              <div class="flex justify-start items-center">
+                <img src="/media/{{blogs.authorImg}}" alt="{{latestBlog.author}}" class="w-8 rounded-full">
+                <p class="author f-medium text-sm md:text-base ml-2">
+                  By {{blogs.author | title}}
+                </p>
+              </div>
+              <p class="title f-bold my-3 lg:text-3xl">
+                <a href="{{blogs.slug}}">{{blogs.title | title}}</a>
+              </p>
+              <p class="blog-content f-medium hidden sm:block">
+                {{blogs.body | safe | truncatewords:"40"}}
+              </p>
+              <p class="date mt-2">
+                Published on : {{blogs.published_on}}
+              </p>
+              <div class="w-full text-right">
+                <a href="/blogs/{{blogs.slug}}">
+                  <button class="my-btn">Read More</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock body %}

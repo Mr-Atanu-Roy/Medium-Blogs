@@ -1,0 +1,55 @@
+{% extends '../blocks/base.html' %}
+{% block title %}Blogs On {{category.category | upper}}{% endblock title %}
+{% block body %}
+
+<section class="section px-10 2xl:px-20">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="w-full col-span-1 xl:w-2/3 img-div">
+            <img src="/media/{{category.categoryImg}}" alt="" class="w-full image">
+        </div>
+        <div class="col-span-2">
+            <h2 class="f-bold text-xl lg:text-3xl capitalize">read blogs related to {{category.category | title}}</h2>
+            <p class="f-medium text-lg mt-8">
+                {{category.description}}
+            </p>
+        </div>
+    </div>
+    <div class="w-full">
+        <div class="flex flex-col justify-center item-center w-full my-20">
+            {% for blogs in relatedBlogs %}
+                {% if category.category in  blogs.tags%}
+                <div class="blog-box flex justify-evenly item-center my-8 lg:my-14">
+                    <div class="mr-4 w-1/2 md:w-1/2 lg:w-1/4 2xl:w-1/5 overflow-hidden img-div">
+                        <img src="/media/{{blogs.img1 | lower}}" alt="" class="image">
+                    </div>
+                    <div class="content w-4/6">
+                        <div class="flex justify-start items-center">
+                            <img src="/media/{{blogs.authorImg}}" alt="{{latestBlog.author}}" class="w-8 rounded-full">
+                            <p class="author f-medium text-sm md:text-base ml-2">
+                                By {{blogs.author | title}}
+                            </p>
+                          </div>
+                        <p class="title f-bold my-3 lg:text-3xl">
+                        <a href="/blogs/{{blogs.slug}}">{{blogs.title | title}}</a>
+                        </p>
+                        <p class="blog-content f-medium hidden sm:block">
+                        {{blogs.body | safe | truncatewords:"40"}}
+                        </p>
+                        <p class="date mt-2">
+                        Published on : {{blogs.published_on}}
+                        </p>
+                        <div class="w-full text-right">
+                        <a href="/blogs/{{blogs.slug}}">
+                            <button class="my-btn">Read More</button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

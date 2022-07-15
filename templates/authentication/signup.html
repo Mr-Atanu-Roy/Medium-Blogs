@@ -1,0 +1,101 @@
+{% extends '../blocks/base.html' %}
+{% block title %}SignUp To Medium{% endblock title %}
+{% block body %}
+<section class="section flex justify-center">
+    <form class="w-full max-w-lg rounded-lg bg-white p-6 mb-12" method="post" action="{% url 'signup' %}" style="height: {% if error != "" %} 822px {% else %} 750px {% endif %}  ;">
+      {% if error != "" %}
+      <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3 f-medium" role="alert">
+        {{error | upper}}
+      </div>
+      {% endif %}  
+      {% csrf_token %}
+        <h2 class="font-medium leading-tight text-4xl mt-0 mb-6 text-black uppercase f-bold">SignUp</h2>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="f-medium block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                for="fname"
+              >
+                First Name
+              </label>
+              <input
+                class="f-medium appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="fname"
+                type="text"
+                placeholder="Akash" value="{{fname}}" name="fname"
+              />
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="f-medium block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                for="lname"
+              >
+                Last Name
+              </label>
+              <input
+                class="f-medium appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="lname"
+                type="text"
+                placeholder="Verma" value="{{lname}}" name="lname"
+              />
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="f-medium block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                for="email"
+              >
+                Email
+              </label>
+              <input
+                class="f-medium appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="email"
+                type="email"
+                placeholder="example abc@xyz.com" value="{{email}}" name="email"
+              />
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <label
+              class="f-medium block uppercase tracking-wide text-black text-xs font-bold mb-2"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              class="f-medium appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="password"
+              type="password"
+              placeholder="choose a password for login" value="{{password}}" name="password"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="f-medium block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                for="cpassword"
+              >
+                Confirm Password
+              </label>
+              <input
+                class="f-medium appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="cpassword"
+                type="password"
+                placeholder="confirm your password" value="{{cpassword}}" name="cpassword"
+              />
+            </div>
+        </div>
+        <div class="flex justify-center m-6 text-center">
+            <span class="text-sm f-medium text-center" style="font-size: 1.12rem;">
+             Already registered ? <a href=" {% url 'login' %} " class="underline"> Login </a>
+            </span>
+        </div>
+        <button class="my-btn w-full">signup</button>
+      </form>
+</section>
+{% endblock body %}

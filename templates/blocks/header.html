@@ -1,0 +1,20 @@
+<header>
+    <div id="header-logo">
+        <a href=" {% url 'home' %} ">
+            <img src="/static/images/medium-logo.png" alt="Medium">
+        </a>
+    </div>
+    <div id="header-links">
+        <ul>
+            <li> <a href=" {% url 'home' %} " class="links">Home</a> </li>
+            <li> <a href=" {% url 'about' %} " class="links">Our Story</a> </li>
+            <li> <a href=" {% url 'blogs' %} " class="links">Read Blogs</a> </li>
+            {% if user.is_authenticated %}
+            {% comment %} <li> <a href=" {% url 'dashboard' %} " class="links">Dashboard</a> </li> {% endcomment %}
+            <li> <a href=" {% url 'logout' %} " id="header-login">LogOut</a> </li>
+            {% else %}
+            <li> <a href=" {% url 'login' %} " id="header-login">LogIn</a> </li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
