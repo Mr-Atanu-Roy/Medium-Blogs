@@ -1,0 +1,1 @@
+web: gunicorn MediumBlog.wsgi --log-file -

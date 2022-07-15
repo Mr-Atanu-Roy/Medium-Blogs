@@ -19,6 +19,11 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+#done for heroku
+from django.views.static import serve
+from django.conf.urls import url
+
+
 #customizing django admin panel text
 admin.site.site_header = "Medium-Blogs Admin"
 admin.site.site_title = "Medium-Blogs Admin Portal"
@@ -30,6 +35,10 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('authentication/', include('authentication.urls')),
     path('blogs/', include('blogs.urls')),
+
+    #done for heroku
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
 
 #for media file
